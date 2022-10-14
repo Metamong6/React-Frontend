@@ -2,7 +2,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import Welcome from "./pages/Welcome";
 import Map from "./pages/Map";
-import Test from "./pages/Test";
 import MainHeader from "./components/header/MainHeader";
 
 function App() {
@@ -20,8 +19,17 @@ function App() {
           <Route path={"/map"}>
             <Map />
           </Route>
-          <Route path={"/test"}>
-            <Test />
+          <Route path={"/kubeflow"}>
+            <Map />
+          </Route>
+          <Route path={"/grafana"}>
+            <Map />
+          </Route>
+          <Route path={"/jenkins"}>
+            <Map />
+          </Route>
+          <Route path={"/argo"}>
+            <Map />
           </Route>
         </Switch>
       </main>

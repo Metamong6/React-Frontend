@@ -1,0 +1,7 @@
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20rem;
+    margin: 5rem;
+}
