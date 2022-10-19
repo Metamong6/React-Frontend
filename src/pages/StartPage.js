@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-// import video from "../assets/nyc-video.mp4";
-// import VideoBg from "reactjs-videobg";
+import video from "../assets/nyc-video.mp4";
+import VideoBg from "reactjs-videobg";
 import { Box, Text } from "@chakra-ui/react";
 
 
@@ -14,9 +14,9 @@ const StartPage = () => {
                 width: "100vw",
             }}
         >
-            {/* <VideoBg>
+            <VideoBg>
                 <VideoBg.Source src={video} type="video/mp4"/>
-            </VideoBg> */}
+            </VideoBg>
 
             <Link to={"/welcome"}>
                 <Box sx={{ 
@@ -27,7 +27,7 @@ const StartPage = () => {
                         alignItems: "center",
                         border: "1px solid black",
                         fontSize: "2rem",
-                        color: "black",
+                        color: "white",
                         borderRadius: "8px",
                         "&:hover": {
                             backgroundColor: 'rgb(7, 177, 77, 0.42)',
@@ -35,7 +35,7 @@ const StartPage = () => {
                         }
                     }}
                 >
-                    <Text fontSize={"2xl"} color="black">Get Started</Text>
+                    <Text fontSize={"2xl"} color="white" as="b">Get Started</Text>
                 </Box>
             </Link>
         </Box>
