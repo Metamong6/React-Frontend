@@ -8,7 +8,7 @@ const PredictionPage = () => {
             <MainHeader />
             <GoogleMapsAPI />
         </>
-    
+
     )
 }
 

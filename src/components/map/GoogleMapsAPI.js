@@ -31,16 +31,23 @@ const GoogleMapsAPI = () => {
   const originRef = useRef()
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef()
-
-  const [selected, setSelected] = useState('')  //인원수
-  const [useTime, setUseTime] = useState('')          // 시간
-
-  const handleSelect = (event) => {             // 인원수
-    setSelected(event.target.value)
+  
+  //탑승인원
+  const [passenger, setPassenger] = useState('')
+  const handlePassenger = (event) => {
+    setPassenger(event.target.value)
   }
 
-  const handleTime = (event) => {               // 시간
-    setUseTime(event.target.value)
+  //결제 수단
+  const [paymentType, setPaymentType] = useState('')  
+  const handlePaymentType = (event) => {
+    setPaymentType(event.target.value)
+  }
+
+  // 탑승 시간
+  const [departureTime, setDepartureTime] = useState(now.format().slice(0, 16))
+  const handleDepartureTime = (event) => {               
+    setDepartureTime(event.target.value)
   }
 
   if (!isLoaded) {
@@ -50,7 +57,8 @@ const GoogleMapsAPI = () => {
   function calculate() {
     calculateRoute()
     calculatePosition()
-    console.log(useTime, selected, distance)
+
+
   }
 
   async function calculatePosition() {
@@ -68,7 +76,9 @@ const GoogleMapsAPI = () => {
         lng2 = lng
       }
 
-      console.log(lat1, lat2, lng1, lng2)
+      console.log(lat1, lng1, lat2, lng2)
+      console.log(passenger, paymentType, departureTime, Math.ceil(distance / 10) / 100)
+
       // add fare api
       // setFare
       setFare(lat1)
@@ -86,8 +96,9 @@ const GoogleMapsAPI = () => {
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
     })
+
     setDirectionsResponse(results)
-    setDistance(results.routes[0].legs[0].distance.text)
+    setDistance(results.routes[0].legs[0].distance.value)
     setDuration(results.routes[0].legs[0].duration.text)
   }
 
@@ -113,7 +124,7 @@ const GoogleMapsAPI = () => {
         {/* Google Map Box */}
         <GoogleMap
           center={center}
-          zoom={10}
+          zoom={11}
           mapContainerStyle={{ width: '100%', height: '100%' }}
           options={{
             zoomControl: false,
@@ -131,13 +142,13 @@ const GoogleMapsAPI = () => {
       </Box>
       <Box
         p={4}
-        borderRadius={"1rem"}
         m={4}
+        borderRadius={"1rem"}
         bgcolor={'rgba(0, 0, 0, 0.7)'}
         shadow='base'
         minWidth='container.md'
         zIndex='1'
-        marginTop="65vh"
+        marginTop="60vh"
       >
         <Stack direction={"row"} spacing={4} justifyItems='center' alignItems="flex-end">
           
@@ -176,14 +187,14 @@ const GoogleMapsAPI = () => {
           </Box>
           
           <FormControl sx={{ m: 1, minWidth: 120, }}>
-            <InputLabel id="selected" sx={{ color: "white" }}>인원수</InputLabel>
+            <InputLabel id="passenger" sx={{ color: "white" }}>탑승인원</InputLabel>
             <Select 
-              labelId="selected"
-              id="selected"
-              value={selected}
+              labelId="passenger"
+              id="passenger"
+              value={passenger}
               label="인원수"
               variant='standard'
-              onChange={handleSelect}
+              onChange={handlePassenger}
               sx={{
                 color: "white",
                 "&:hover": {
@@ -195,19 +206,44 @@ const GoogleMapsAPI = () => {
               <MenuItem value={2}>2명</MenuItem>
               <MenuItem value={3}>3명</MenuItem>
               <MenuItem value={4}>4명</MenuItem>
+              <MenuItem value={5}>5명</MenuItem>
+              <MenuItem value={6}>6명</MenuItem>
+              <MenuItem value={7}>7명</MenuItem>
+              <MenuItem value={8}>8명</MenuItem>
+              <MenuItem value={9}>9명</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl sx={{ m: 1, minWidth: 120, }}>
+            <InputLabel id="payment-type" sx={{ color: "white" }}>결제 수단</InputLabel>
+            <Select 
+              labelId="payment-type"
+              id="payment-type"
+              value={paymentType}
+              label="결제 수단"
+              variant='standard'
+              onChange={handlePaymentType}
+              sx={{
+                color: "white",
+                "&:hover": {
+                  backgroundColor: 'rgb(255, 255, 255, 0.42)'
+                }
+              }}
+            >
+              <MenuItem value={1}>신용카드</MenuItem>
+              <MenuItem value={2}>현금</MenuItem>
             </Select>
           </FormControl>
 
           <TextField
             required
             autoFocus
-            
             id="datetime-local"
             label="출발 시간"
             type="datetime-local"
             variant="standard"
-            defaultValue={now.format().slice(0, 16)} //"2017-05-24T10:30"
-            onChange={handleTime}
+            defaultValue={departureTime} //"2017-05-24T10:30"
+            onChange={handleDepartureTime}
             sx={{
               "&:hover": {
                 backgroundColor: 'rgb(255, 255, 255, 0.42)',
@@ -228,22 +264,20 @@ const GoogleMapsAPI = () => {
             placeholder="SX"
           />
 
-          
-          
         </Stack>
-        <Stack direction={"row"} spacing={4} mt={4} alignItems="flex-end" justifyContent="space-between">
-          <ButtonGroup sx={{ color: "white" }}>
+        <Stack direction={"row"} spacing={4} mt={4} alignItems="flex-end" justifyContent="space-between" borderTop="1px solid white">
+          <ButtonGroup sx={{ color: "white", marginTop: "3vh" }}>
             <Button variant="outlined" disabled>
-              <Typography color="white" >거리: {distance} </Typography>
+              <Typography color="white" >거리: { Math.ceil(distance / 10) / 100} km </Typography>
             </Button>
             <Button variant="outlined" disabled>
-              <Typography color="white">시간: {duration} </Typography>
+              <Typography color="white">시간: {duration}</Typography>
             </Button>
             <Button variant="outlined" disabled>
-            <Typography color="white">요금: {fare} </Typography>
+            <Typography color="white">요금: {fare} $</Typography>
             </Button>
           </ButtonGroup>
-           <ButtonGroup sx={{ color: "white" }}>
+           <ButtonGroup sx={{ color: "white", border: "1px solid green" }}>
             <Button
               size='large'
               onClick={calculate}

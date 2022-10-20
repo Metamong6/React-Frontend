@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png"
 import { Box, Stack, Typography, Button } from "@mui/material"
 
 const Image = styled.img`
-    width: 100%;
+    width: 90%;
     height: 100%;
     margin-left: 0.5vw;
 `;
