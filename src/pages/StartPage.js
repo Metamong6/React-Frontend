@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import video from "../assets/nyc-video.mp4";
-import VideoBg from "reactjs-videobg";
 import { Stack, Box, Typography } from "@mui/material";
+import "./StartPage.css";
 
 
 const StartPage = () => {
@@ -15,10 +15,11 @@ const StartPage = () => {
                 width: "100vw",
             }}
         >
-            <VideoBg>
-                <VideoBg.Source src={video} type="video/mp4"/>
-            </VideoBg>
-            <Stack spacing={32} justifyContent="center" alignItems="center">
+            <video autoPlay muted loop id="myVideo">
+                <source src={video} type="video/mp4"></source>
+            </video>
+
+            <Stack spacing={24} justifyContent="center" alignItems="center">
                 <Stack spacing={4} justifyContent="center" alignItems="center">
                     <Typography  fontSize={"8vh"} as="b" color={"#D0D0D0"}>New York City</Typography>
                     <Typography  fontSize={"5vh"} as="b" color={"#D0D0D0"}>Taxi Fare Prediction</Typography>
@@ -26,7 +27,7 @@ const StartPage = () => {
                 <Link to={"/prediction"}>
                     <Box sx={{ 
                             width: "16vw",
-                            height: "8vh",
+                            height: "10vh",
                             display:"flex", 
                             justifyContent: "center", 
                             alignItems: "center",
