@@ -1,53 +1,59 @@
 import { Link, NavLink } from "react-router-dom"
-import styled from "styled-components";
-import logo from "../../assets/metamong.png"
-import { Box, HStack, Text, Button } from "@chakra-ui/react";
+import styled from "styled-components"
+import logo from "../../assets/logo.png"
+import { Box, Stack, Typography, Button } from "@mui/material"
 
+const Image = styled.img`
+    width: 100%;
+    height: 100%;
+    margin-left: 0.5vw;
+`;
 
 const MainHeader = () => {
-    const Image = styled.img`
-        width: 100%;
-        height: 100%;
-    `;
+    
     return (
-        <Box sx={{ height: "12vh", display:"flex", justifyContent:"space-between", background:"#1c2841" }}>
-            <Box sx={{ display:"flex"}}>
-                <Link to={"/"}>
+        <Box sx={{ height: "8vh", display:"flex", justifyContent:"space-between", background:"#1c2841" }}>
+            <Link to={"/"}>       
                     <Image src={logo} alt="main logo"/>
-                </Link>
-            </Box>
-            <HStack spacing={"16"} sx={{ marginLeft: "-10vw" }}>
+            </Link>
+            <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={4}
+                marginRight="6vw"
+            >
                 <NavLink to={"/welcome"}>
-                    <Button colorScheme={"whiteAlpha"} variant="link">
-                        <Text fontSize={"md"} color={"white"} as="b">Welcome</Text>
+                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
+                        <Typography variant="button" display="block" gutterBottom color="white">Welcome</Typography>
                     </Button>
                 </NavLink>
                 <NavLink to={"/prediction"}>
-                    <Button colorScheme={"whiteAlpha"} variant="link">
-                        <Text fontSize={"md"} color={"white"} as="b">Prediction</Text>
+                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
+                        <Typography variant="button" display="block" gutterBottom color="white">Prediction</Typography>
                     </Button>
                 </NavLink>
                 <NavLink to={{ pathname: "https://kf.ysflow.com" }} target="_blacnk">
-                    <Button colorScheme={"whiteAlpha"} variant="link">
-                        <Text fontSize={"md"} color={"white"} as="b">Kubeflow</Text>
+                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
+                        <Typography variant="button" display="block" gutterBottom color="white">Kubeflow</Typography>
                     </Button>
                 </NavLink>
                 <NavLink to={{ pathname: "https://grafana.ysflow.com" }} target="_blacnk">
-                    <Button colorScheme={"whiteAlpha"} variant="link">
-                        <Text fontSize={"md"} color={"white"} as="b">Grafana</Text>
+                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
+                        <Typography variant="button" display="block" gutterBottom color="white">Grafana</Typography>
                     </Button>
                 </NavLink>
                 <NavLink to={{ pathname: "https://argo.ysflow.com" }} target="_blacnk">
-                    <Button colorScheme={"whiteAlpha"} variant="link">
-                        <Text fontSize={"md"} color={"white"} as="b">Argo</Text>
+                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
+                        <Typography variant="button" display="block" gutterBottom color="white">Argo</Typography>
                     </Button>
                 </NavLink>
                 <NavLink to={{ pathname: "https://argocd.ysflow.com" }} target="_blacnk">
-                    <Button colorScheme={"whiteAlpha"} variant="link">
-                        <Text fontSize={"md"} color={"white"} as="b">Argo CD</Text>
+                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
+                        <Typography variant="button" display="block" gutterBottom color="white">Argo CD</Typography>
                     </Button>
                 </NavLink>
-            </HStack>
+            </Stack>
             <Box />
         </Box>
     )
