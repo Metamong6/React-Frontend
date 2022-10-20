@@ -23,11 +23,6 @@ const MainHeader = () => {
                 spacing={4}
                 marginRight="6vw"
             >
-                <NavLink to={"/welcome"}>
-                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
-                        <Typography variant="button" display="block" gutterBottom color="white">Welcome</Typography>
-                    </Button>
-                </NavLink>
                 <NavLink to={"/prediction"}>
                     <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
                         <Typography variant="button" display="block" gutterBottom color="white">Prediction</Typography>
@@ -51,6 +46,11 @@ const MainHeader = () => {
                 <NavLink to={{ pathname: "https://argocd.ysflow.com" }} target="_blacnk">
                     <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
                         <Typography variant="button" display="block" gutterBottom color="white">Argo CD</Typography>
+                    </Button>
+                </NavLink>
+                <NavLink to={"/about"}>
+                    <Button variant="text" size="large" sx={{ borderRadius:"1vw" }}>
+                        <Typography variant="button" display="block" gutterBottom color="white">About</Typography>
                     </Button>
                 </NavLink>
             </Stack>

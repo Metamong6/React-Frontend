@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import StartPage from "./pages/StartPage";
-import WelcomePage from "./pages/WelcomePage";
+import AboutPage from "./pages/AboutPage";
 import PredictionPage from "./pages/PredictionPage";
 
 
@@ -10,11 +10,11 @@ function App() {
         <Route path={"/"} exact>
           <StartPage />
         </Route>
-        <Route path={"/welcome"}>
-          <WelcomePage />
-        </Route>
         <Route path={"/prediction"}>
           <PredictionPage />
+        </Route>
+        <Route path={"/about"}>
+          <AboutPage />
         </Route>
     </Switch>
   );

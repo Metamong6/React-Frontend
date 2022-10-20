@@ -23,7 +23,7 @@ const StartPage = () => {
                     <Typography  fontSize={"8vh"} as="b" color={"#D0D0D0"}>New York City</Typography>
                     <Typography  fontSize={"5vh"} as="b" color={"#D0D0D0"}>Taxi Fare Prediction</Typography>
                 </Stack>
-                <Link to={"/welcome"}>
+                <Link to={"/prediction"}>
                     <Box sx={{ 
                             width: "16vw",
                             height: "8vh",

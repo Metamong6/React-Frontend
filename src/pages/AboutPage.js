@@ -2,7 +2,7 @@ import { Stack, Typography, Box } from "@mui/material"
 import MainHeader from "../components/header/MainHeader";
 
 
-const WelcomePage = () => {
+const AboutPage = () => {
     return (
         <>
             <MainHeader />
@@ -89,6 +89,6 @@ const WelcomePage = () => {
     )
 }
 
-export default WelcomePage
+export default AboutPage
 
 
