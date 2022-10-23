@@ -10,7 +10,11 @@ import {
 } from '@react-google-maps/api'
 import GooglePostionAPI from './GooglePostionAPI'
 import dayjs from 'dayjs'
-import { postTest } from '../../api/common'
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: "http://13.124.36.34:32056"
+});
 
 const center = { lat: 40.7127744, lng: -74.006059 }
 const now = dayjs()
@@ -57,31 +61,37 @@ const GoogleMapsAPI = () => {
   function calculate() {
     calculateRoute()
     calculatePosition()
-    postTest()
-
   }
 
   async function calculatePosition() {
-      let lat1, lat2, lng1, lng2;
+    let lat1, lat2, lng1, lng2
 
-      if (originRef.current.value){
-        const { lat, lng} = await GooglePostionAPI(originRef.current.value)
-        lat1 = lat
-        lng1 = lng
+    if (originRef.current.value){
+      const { lat, lng } = await GooglePostionAPI(originRef.current.value)
+      lat1 = lat
+      lng1 = lng
+    }
+
+    if (destiantionRef.current.value){
+      const { lat, lng } = await GooglePostionAPI(destiantionRef.current.value)
+      lat2 = lat
+      lng2 = lng
+    }
+
+    console.log(lat1, lng1, lat2, lng2)
+    console.log(passenger, paymentType, departureTime, distance.slice(0, -3))
+    console.log(passenger, paymentType, departureTime, distance.slice(0, -3))
+    
+    const param = {
+      "data":{
+        "ndarray":
+          [passenger, distance.slice(0, -3), [lat1, lng1], [lat2, lng2], paymentType, departureTime, (duration / 60)]
       }
+    }
 
-      if (destiantionRef.current.value){
-        const { lat, lng} = await GooglePostionAPI(destiantionRef.current.value)
-        lat2 = lat
-        lng2 = lng
-      }
-
-      console.log(lat1, lng1, lat2, lng2)
-      console.log(passenger, paymentType, departureTime, Math.ceil(distance / 10) / 100)
-
-      // add fare api
-      // setFare
-      setFare(lat1)
+    const response = await api.post("/seldon/seldon-deploy/startup-pj/api/v1.0/predictions", param)
+  
+    setFare(response.data.data.ndarray)
   }
 
   async function calculateRoute() {
@@ -98,8 +108,9 @@ const GoogleMapsAPI = () => {
     })
 
     setDirectionsResponse(results)
-    setDistance(results.routes[0].legs[0].distance.value)
-    setDuration(results.routes[0].legs[0].duration.text)
+    console.log(results.routes[0].legs[0].duration)
+    setDistance(results.routes[0].legs[0].distance.text)
+    setDuration(results.routes[0].legs[0].duration.value)
   }
 
   function clearRoute() {
@@ -268,13 +279,13 @@ const GoogleMapsAPI = () => {
         <Stack direction={"row"} spacing={4} mt={4} alignItems="flex-end" justifyContent="space-between" borderTop="1px solid white">
           <ButtonGroup sx={{ color: "white", marginTop: "3vh" }}>
             <Button variant="outlined" disabled>
-              <Typography color="white" >거리: { Math.ceil(distance / 10) / 100} km </Typography>
+              <Typography color="white" >거리: { distance}</Typography>
             </Button>
             <Button variant="outlined" disabled>
-              <Typography color="white">시간: {duration}</Typography>
+              <Typography color="white">시간: { Math.ceil(duration / 60) } 분</Typography>
             </Button>
             <Button variant="outlined" disabled>
-            <Typography color="white">요금: {fare} $</Typography>
+            <Typography color="white">요금: { Math.ceil(fare * 10) / 10 } $</Typography>
             </Button>
           </ButtonGroup>
            <ButtonGroup sx={{ color: "white", border: "1px solid green" }}>
