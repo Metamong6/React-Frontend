@@ -10,7 +10,7 @@ import {
 } from '@react-google-maps/api'
 import GooglePostionAPI from './GooglePostionAPI'
 import dayjs from 'dayjs'
-
+import { postTest } from '../../api/common'
 
 const center = { lat: 40.7127744, lng: -74.006059 }
 const now = dayjs()
@@ -57,7 +57,7 @@ const GoogleMapsAPI = () => {
   function calculate() {
     calculateRoute()
     calculatePosition()
-
+    postTest()
 
   }
 
