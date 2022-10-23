@@ -67,7 +67,6 @@ const AboutPage = () => {
                                     <Typography fontSize={"4vh"} color={"#D0D0D0"} as="b"><b>CI/CD</b></Typography>
                                     <Typography fontSize={"2.5vh"} color={"#D0D0D0"} as="b">Argo/Argocd</Typography>
                                     <Typography fontSize={"2.5vh"} color={"#D0D0D0"} as="b">Git Actions</Typography>
-                                    <Typography fontSize={"2.5vh"} color={"#D0D0D0"} as="b">Jenkins</Typography>
                                 </Stack>
                             </Stack>
                             <Stack>
